@@ -18,11 +18,11 @@ const blog = mongoose.model(
 class Blogs {
   constructor() {}
 
-  async getBlogs() {
-    const result = await blog.find({});
-    console.log(result);
-    return result;
-  }
+  // async getBlogs() {
+  //   const result = await blog.find({});
+  //   console.log(result);
+  //   return result;
+  // }
 
   async submitBlog(user, payload) {
     console.log('hiiiii', user);
@@ -59,6 +59,8 @@ class Blogs {
   }
   async getBlogs() {
     const check = await blog.find({});
+    console.log(check);
+    return check;
   }
 
   async addComment(user, postID, payload) {

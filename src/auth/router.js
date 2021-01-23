@@ -48,7 +48,8 @@ router.patch('/blog/:id', checkToken, async (req, res, next) => {
 
 router.get('/posts', async (req, res, next) => {
   try {
-    const result = await blogs.getPost(req);
+    const result = await blogs.getBlogs();
+    console.log(result);
     res.status(200).json(result);
   } catch (err) {
     next(`Can't find post`);
