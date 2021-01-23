@@ -54,8 +54,6 @@ class Blogs {
     } else if (user.role == 'admin') {
       await blog.findByIdAndUpdate(postID, payload);
     }
-    // if (check.length > 0) {
-    // }
   }
   async getBlogs() {
     const check = await blog.find({});
@@ -81,23 +79,6 @@ class Blogs {
     console.log(check);
     return check[0].comments;
   }
-
-  //   async addComment(user, postID, payload) {
-  //     const idPerson = await helper.getID(user.id, 'person');
-  //     const profile = await helper.getProfile(idPerson, 'person');
-  //     const newComment = {
-  //       writerID: user.id,
-  //       comment: payload.comment,
-  //       profile: `${profile.first_name} ${profile.last_name}`,
-  //       avatar: profile.avatar,
-  //       job_title: profile.job_title,
-  //       date: new Date().toString(),
-  //     };
-  //     const targetPost = await this.getPost(postID);
-  //     targetPost.comments.push(newComment);
-  //     await targetPost.save();
-  //     return targetPost.comments.length;
-  //   }
 }
 
 //-----------------------------------// Export Module \\-----------------------------------\\

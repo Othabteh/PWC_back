@@ -12,16 +12,6 @@ router.use(cookieParser());
 
 router.post('/signup', signupHandler);
 router.post('/signin', basicAuth, signinHandler);
-// router.post('/blogs', async (req, res, next) => {
-//   try {
-//     const result = await blogs.getBlogs();
-
-//     console.log(result);
-//     res.status(201).json(result);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
 
 router.post('/submit', checkToken, async (req, res, next) => {
   try {
@@ -90,12 +80,9 @@ function signinHandler(req, res) {
 
 function signupHandler(req, res) {
   users.save(req.body).then(async (user) => {
-    // console.log(user);
     const token = await users.generateToken(user, '15min');
     res.status(201).json({ token, user });
   });
 }
-
-// function blogCreater(req, res) {}
 
 module.exports = router;

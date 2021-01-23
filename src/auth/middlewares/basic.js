@@ -4,14 +4,12 @@ module.exports = (req, res, next) => {
   if (!req.headers.authorization) {
     next('Invalid Login');
   } else {
-    // console.log('__Headers__', req.headers);
     const basicAuth = req.headers.authorization.split(' ').pop();
     const [user, pass] = base64.decode(basicAuth).split(':');
-    // console.log('__BasicAuth__', user, pass);
+
     return users
       .authenticateBasic(user, pass)
       .then(async (validUser) => {
-        // console.log('__ValidUser__', validUser);
         req.token = await users.generateToken(validUser[0]);
         req.user = validUser;
         next();

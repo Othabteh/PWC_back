@@ -13,14 +13,6 @@ const user = mongoose.model(
   }),
 );
 
-// const tokendb = mongoose.model(
-//   'token',
-//   mongoose.Schema({
-//     token: { type: String, required: true },
-//     use: { type: Number, require: true },
-//   }),
-// );
-
 class Users {
   constructor() {
     this.roles = {
@@ -31,8 +23,6 @@ class Users {
   async save(record) {
     const check = await user.find({ username: record.username });
     if (check.length > 0) {
-      // console.log('__Check__',check.length);
-      console.log('username already used');
       return Promise.reject();
     } else {
       record.password = await bcrypt.hash(record.password, 5);
@@ -41,9 +31,7 @@ class Users {
     }
   }
   async authenticateBasic(username, password) {
-    // console.log(username,password);
     const check = await user.find({ username: username });
-    // console.log(check);
     if (check.length > 0) {
       const valid = await bcrypt.compare(password, check[0].password);
       return valid ? check : Promise.reject();
@@ -53,12 +41,7 @@ class Users {
   }
 
   async generateToken(user) {
-    // console.log(SECRET);
-
-    // console.log(singleUse);
-
     let token = jwt.sign({ username: user.username, userID: user._id, role: user.role }, SECRET);
-
     return token;
   }
 
@@ -80,7 +63,6 @@ class Users {
 
   async can(permission) {
     const userData = await user.find({ username: permission.user });
-    // console.log(userData[0]);
     const role = userData[0].role;
     const check = this.roles[role].includes(permission.capability);
     console.log(check);
@@ -92,9 +74,7 @@ class Users {
   }
 
   read(element) {
-    // console.log(element);
     const query = element ? { username: element } : {};
-    // console.log(query);
     return user.find(query);
   }
 }
