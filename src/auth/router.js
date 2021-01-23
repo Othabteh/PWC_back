@@ -22,6 +22,7 @@ router.post('/signin', basicAuth, signinHandler);
 //     next(err);
 //   }
 // });
+
 router.post('/submit', checkToken, async (req, res, next) => {
   try {
     const result = await blogs.submitBlog(req.user, req.body);
@@ -65,6 +66,7 @@ router.post('/comment/:id', checkToken, async (req, res, next) => {
 function signinHandler(req, res) {
   res.status(202).cookie('token', req.token).json({ token: req.token, user: req.user });
 }
+
 function signupHandler(req, res) {
   users.save(req.body).then(async (user) => {
     // console.log(user);

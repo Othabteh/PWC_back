@@ -21,7 +21,7 @@ app.use('/', authRouter);
 module.exports = {
   server: app,
   start: (port) => {
-    port = process.env.PORT || port;
+    port = process.env.PORT || 3030;
     app.listen(port, () => {
       console.log(`up and running on ${port}`);
     });
