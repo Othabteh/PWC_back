@@ -13,13 +13,13 @@ const user = mongoose.model(
   }),
 );
 
-const tokendb = mongoose.model(
-  'token',
-  mongoose.Schema({
-    token: { type: String, required: true },
-    use: { type: Number, require: true },
-  }),
-);
+// const tokendb = mongoose.model(
+//   'token',
+//   mongoose.Schema({
+//     token: { type: String, required: true },
+//     use: { type: Number, require: true },
+//   }),
+// );
 
 class Users {
   constructor() {
