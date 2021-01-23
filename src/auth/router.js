@@ -46,6 +46,17 @@ router.patch('/blog/:id', checkToken, async (req, res, next) => {
   }
 });
 
+router.get('/post/:id', async (req, res, next) => {
+  console.log('params', req.params);
+
+  try {
+    const result = await blogs.getBlog(req.params.id);
+    res.status(201).json(result);
+  } catch (err) {
+    next(`Can't update post`);
+  }
+});
+
 router.get('/posts', async (req, res, next) => {
   try {
     const result = await blogs.getBlogs();

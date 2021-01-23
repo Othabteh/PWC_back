@@ -63,6 +63,12 @@ class Blogs {
     return check;
   }
 
+  async getBlog(id) {
+    const check = await blog.find({ _id: id });
+    console.log(check);
+    return check;
+  }
+
   async addComment(user, postID, payload) {
     console.log('pay;oad', payload);
     const Bolg = await blog.find({ _id: postID });
