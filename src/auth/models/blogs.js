@@ -20,6 +20,7 @@ class Blogs {
 
   async getBlogs() {
     const result = await blog.find({});
+    console.log(result);
     return result;
   }
 
