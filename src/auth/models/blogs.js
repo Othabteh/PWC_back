@@ -75,6 +75,13 @@ class Blogs {
     console.log('blod', Bolg);
     await blog.findByIdAndUpdate(postID, { comments: [...Bolg[0].comments, { author: user.username, body: payload.body }] });
   }
+
+  async getComments(id) {
+    const check = await blog.find({ _id: id });
+    console.log(check);
+    return check[0].comments;
+  }
+
   //   async addComment(user, postID, payload) {
   //     const idPerson = await helper.getID(user.id, 'person');
   //     const profile = await helper.getProfile(idPerson, 'person');

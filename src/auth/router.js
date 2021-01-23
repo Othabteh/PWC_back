@@ -75,6 +75,15 @@ router.post('/comment/:id', checkToken, async (req, res, next) => {
     next('not allowed');
   }
 });
+
+router.get('/comment/:id', async (req, res, next) => {
+  try {
+    const result = await blogs.getComments(req.params.id);
+    res.status(201).json(result);
+  } catch (err) {
+    next('not allowed');
+  }
+});
 function signinHandler(req, res) {
   res.status(202).cookie('token', req.token).json({ token: req.token, user: req.user });
 }
